@@ -1,0 +1,19 @@
+<h1>Liste des tâches</h1>
+
+<ul>
+  <% @tasks.each do |task| %>
+    <li>
+      <%= check_box_tag "completed_#{task.id}", "1", task.completed, disabled: true %>
+      <%= link_to task.title, task_path(task) %>
+      |
+      <%= link_to "Modifier", edit_task_path(task) %>
+      |
+      <%= link_to "Supprimer",
+        task_path(task),
+        data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}
+      %>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to "Créer une nouvelle tâche", new_task_path %>
